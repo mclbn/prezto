@@ -1,13 +1,53 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+# Zsh history settings
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.history
+APPEND_HISTORY=true
+INC_APPEND_HISTORY=true
+SHARE_HISTORY=true
+EXTENDED_HISTORY=true
+HIST_IGNORE_DUPS=true
+HIST_REDUCE_BLANKS=true
+HIST_NO_STORE=true
+NO_HIST_BEEP=true
+
+# Zsh auto-correct, should already be set by Prezto
+setopt correct
+
+# Various additional Zsh options
+setopt nobeep
+setopt cdablevars
+setopt multios
+
+# Emacs bindkeys please
+bindkey -e
+
+# Used later by script in order to launch the right shell
+export SHELL="$(which zsh)"
+
+# TERM var
+export TERM=xterm-256color
+
+if [ -n "$INSIDE_EMACS" ]; then
+    PROMPT="%#> "
+fi
+
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+    fi
+
+if [ -d ~/.zshrc.d ]; then
+    for file in ~/.zshrc.d/*.zsh; do
+        source ${file}
+    done
+    if [ -d ~/.zshrc.d/functions ]; then
+	for file in ~/.zshrc.d/functions/*.zsh; do
+	    source ${file}
+	done
+    fi
+fi
