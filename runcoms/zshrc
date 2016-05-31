@@ -30,8 +30,14 @@ bindkey -e
 # Used later by script in order to launch the right shell
 export SHELL="$(which zsh)"
 
+# Setting PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:$PATH
+
 # TERM var
 export TERM=xterm-256color
+
+# TERMINAL var (for i3-sensible-terminal)
+export TERMINAL=xterm
 
 if [ -n "$INSIDE_EMACS" ]; then
     PROMPT="%#> "
@@ -49,5 +55,10 @@ if [ -d ~/.zshrc.d ]; then
 	for file in ~/.zshrc.d/functions/*.zsh; do
 	    source ${file}
 	done
+    fi
+    if [ -d ~/.zshrc.d/completions ]; then
+	fpath=( $HOME/.zsh/completions $fpath )
+	autoload -U compinit
+	compinit
     fi
 fi
