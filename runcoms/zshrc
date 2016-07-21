@@ -43,10 +43,6 @@ if [ -n "$INSIDE_EMACS" ]; then
     PROMPT="%#> "
 fi
 
-if [ -f ~/.zshrc.local ]; then
-    source ~/.zshrc.local
-    fi
-
 if [ -d ~/.zshrc.d ]; then
     for file in ~/.zshrc.d/*.zsh; do
         source ${file}
@@ -61,4 +57,8 @@ if [ -d ~/.zshrc.d ]; then
 	autoload -U compinit
 	compinit
     fi
+fi
+
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
 fi
