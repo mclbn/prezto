@@ -430,13 +430,11 @@ for keymap in 'emacs' 'viins'; do
   # Insert 'sudo ' at the beginning of the line.
   bindkey -M "$keymap" "$key_info[Control]X$key_info[Control]S" prepend-sudo
 
-<<<<<<< HEAD
   # Insert 'proxychains ' at the beginning of the line.
   bindkey -M "$keymap" "$key_info[Control]X$key_info[Control]P" prepend-proxychains
-=======
+
   # control-space expands all aliases, including global
   bindkey -M "$keymap" "$key_info[Control] " glob-alias
->>>>>>> upstream/master
 done
 
 # Delete key deletes character in vimcmd cmd mode instead of weird default functionality
