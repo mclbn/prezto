@@ -201,6 +201,14 @@ function prepend-sudo {
 }
 zle -N prepend-sudo
 
+function prepend-proxychains {
+  if [[ "$BUFFER" != proxychains\ * ]]; then
+    BUFFER="proxychains $BUFFER"
+    (( CURSOR += 12 ))
+  fi
+}
+zle -N prepend-proxychains
+
 # Reset to default key bindings.
 bindkey -d
 
@@ -305,6 +313,9 @@ for keymap in 'emacs' 'viins'; do
 
   # Insert 'sudo ' at the beginning of the line.
   bindkey -M "$keymap" "$key_info[Control]X$key_info[Control]S" prepend-sudo
+
+  # Insert 'proxychains ' at the beginning of the line.
+  bindkey -M "$keymap" "$key_info[Control]X$key_info[Control]P" prepend-proxychains
 done
 
 # Do not expand .... to ../.. during incremental search.
